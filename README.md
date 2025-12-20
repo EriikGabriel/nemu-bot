@@ -23,8 +23,8 @@ This is the most complete discord bot base you've ever seen! Developed by [@rinc
 
 # Tasks and Features
 
-[]  Create a private voice channel per user permissions. Based on a current playing game. Temporary and secure
-[ ] Register events and automatic change icons in festive dates
-[ ] Register and wish birthdays members
-[ ] Programmer features
-[ ] Music bot features
+- [ ] Create a private voice channel per user permissions. Based on a current playing game. Temporary and secure;
+- [ ] Register events and automatic change icons in festive dates;
+- [ ] Register and wish birthdays members;
+- [ ] Programmer features;
+- [ ] Music bot features;
