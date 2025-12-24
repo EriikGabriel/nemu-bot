@@ -18,6 +18,13 @@
     "balance": "#45ddc0",
     "brilliance": "#f07d5f",
     "nitro": "#ff6bfa",
-    "bravery": "#9c84ef"
+    "bravery": "#9c84ef",
+    "pumping": "#fca620"
+  },
+  "images": {
+    "cake": "https://media.discordapp.net/attachments/1300244781364154399/1453159671274672269/cake.png?ex=694c6fe8&is=694b1e68&hm=a974852c8f4e36bdf243f9254715d8d49ee966470469b0cf3d611fe56e6a3858&=&format=webp&quality=lossless"
+  },
+  "channels": {
+    "birthdayAnnouncements": ""
   }
 }
