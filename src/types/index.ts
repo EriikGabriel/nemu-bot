@@ -1,3 +1,5 @@
+import { ModalData } from "discord.js"
+
 export const months: Record<number, string> = {
   1: "Janeiro",
   2: "Fevereiro",
@@ -12,3 +14,5 @@ export const months: Record<number, string> = {
   11: "Novembro",
   12: "Dezembro",
 }
+
+export type SelectInputModalData = ModalData & { values: string[] }

@@ -1,25 +1,6 @@
 {
+  "extends": "@constatic/base/tsconfig",
   "compilerOptions": {
-    // General options
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "strict": true,
-
-    // Language and environment options
-    "lib": ["ESNext"],
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-
-    // Linting options
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noImplicitOverride": true,
-    "noEmitOnError": true,
-
     // Output Options
     "outDir": "./build",
     "rootDir": "./src",
@@ -27,7 +8,7 @@
     // Path mapping Options
     "paths": {
       "#env": ["./src/env.ts"],
-      "#base": ["./src/discord/base/index.ts"],
+      "#base": ["./src/discord/index.ts"],
       "#functions": ["./src/functions/index.ts"],
       "#database": ["./src/database/index.ts"],
       "#server": ["./src/server/index.ts"],
@@ -36,7 +17,11 @@
       "#lib/*": ["./src/lib/*"],
       "#shared/*": ["./src/shared/*"],
       "#types/*": ["./src/@types/*"],
-      "#emojis": ["./emojis.json"]
+      "#emojis": ["./emojis.json"],
+      "@types": ["./src/types/index.ts"],
+      "@commands/*": ["./src/discord/commands/*"],
+      "@responders/*": ["./src/discord/responders/*"],
+      "@events/*": ["./src/discord/events/*"]
     }
   },
 

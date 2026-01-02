@@ -385,7 +385,11 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Birthday: 'Birthday',
-  GuildConfig: 'GuildConfig'
+  GuildConfig: 'GuildConfig',
+  TempVoiceSystem: 'TempVoiceSystem',
+  TempVoiceJoinChannel: 'TempVoiceJoinChannel',
+  TempVoiceTemplate: 'TempVoiceTemplate',
+  TempVoiceChannel: 'TempVoiceChannel'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "birthday" | "guildConfig"
+    modelProps: "birthday" | "guildConfig" | "tempVoiceSystem" | "tempVoiceJoinChannel" | "tempVoiceTemplate" | "tempVoiceChannel"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +557,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TempVoiceSystem: {
+      payload: Prisma.$TempVoiceSystemPayload<ExtArgs>
+      fields: Prisma.TempVoiceSystemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TempVoiceSystemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TempVoiceSystemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>
+        }
+        findFirst: {
+          args: Prisma.TempVoiceSystemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TempVoiceSystemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>
+        }
+        findMany: {
+          args: Prisma.TempVoiceSystemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>[]
+        }
+        create: {
+          args: Prisma.TempVoiceSystemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>
+        }
+        createMany: {
+          args: Prisma.TempVoiceSystemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TempVoiceSystemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>[]
+        }
+        delete: {
+          args: Prisma.TempVoiceSystemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>
+        }
+        update: {
+          args: Prisma.TempVoiceSystemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>
+        }
+        deleteMany: {
+          args: Prisma.TempVoiceSystemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TempVoiceSystemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TempVoiceSystemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>[]
+        }
+        upsert: {
+          args: Prisma.TempVoiceSystemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceSystemPayload>
+        }
+        aggregate: {
+          args: Prisma.TempVoiceSystemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTempVoiceSystem>
+        }
+        groupBy: {
+          args: Prisma.TempVoiceSystemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TempVoiceSystemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TempVoiceSystemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TempVoiceSystemCountAggregateOutputType> | number
+        }
+      }
+    }
+    TempVoiceJoinChannel: {
+      payload: Prisma.$TempVoiceJoinChannelPayload<ExtArgs>
+      fields: Prisma.TempVoiceJoinChannelFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TempVoiceJoinChannelFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TempVoiceJoinChannelFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>
+        }
+        findFirst: {
+          args: Prisma.TempVoiceJoinChannelFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TempVoiceJoinChannelFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>
+        }
+        findMany: {
+          args: Prisma.TempVoiceJoinChannelFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>[]
+        }
+        create: {
+          args: Prisma.TempVoiceJoinChannelCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>
+        }
+        createMany: {
+          args: Prisma.TempVoiceJoinChannelCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TempVoiceJoinChannelCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>[]
+        }
+        delete: {
+          args: Prisma.TempVoiceJoinChannelDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>
+        }
+        update: {
+          args: Prisma.TempVoiceJoinChannelUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>
+        }
+        deleteMany: {
+          args: Prisma.TempVoiceJoinChannelDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TempVoiceJoinChannelUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TempVoiceJoinChannelUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>[]
+        }
+        upsert: {
+          args: Prisma.TempVoiceJoinChannelUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceJoinChannelPayload>
+        }
+        aggregate: {
+          args: Prisma.TempVoiceJoinChannelAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTempVoiceJoinChannel>
+        }
+        groupBy: {
+          args: Prisma.TempVoiceJoinChannelGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TempVoiceJoinChannelGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TempVoiceJoinChannelCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TempVoiceJoinChannelCountAggregateOutputType> | number
+        }
+      }
+    }
+    TempVoiceTemplate: {
+      payload: Prisma.$TempVoiceTemplatePayload<ExtArgs>
+      fields: Prisma.TempVoiceTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TempVoiceTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TempVoiceTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.TempVoiceTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TempVoiceTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.TempVoiceTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.TempVoiceTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.TempVoiceTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TempVoiceTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.TempVoiceTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>
+        }
+        update: {
+          args: Prisma.TempVoiceTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.TempVoiceTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TempVoiceTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TempVoiceTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.TempVoiceTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.TempVoiceTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTempVoiceTemplate>
+        }
+        groupBy: {
+          args: Prisma.TempVoiceTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TempVoiceTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TempVoiceTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TempVoiceTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
+    TempVoiceChannel: {
+      payload: Prisma.$TempVoiceChannelPayload<ExtArgs>
+      fields: Prisma.TempVoiceChannelFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TempVoiceChannelFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TempVoiceChannelFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>
+        }
+        findFirst: {
+          args: Prisma.TempVoiceChannelFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TempVoiceChannelFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>
+        }
+        findMany: {
+          args: Prisma.TempVoiceChannelFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>[]
+        }
+        create: {
+          args: Prisma.TempVoiceChannelCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>
+        }
+        createMany: {
+          args: Prisma.TempVoiceChannelCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TempVoiceChannelCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>[]
+        }
+        delete: {
+          args: Prisma.TempVoiceChannelDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>
+        }
+        update: {
+          args: Prisma.TempVoiceChannelUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>
+        }
+        deleteMany: {
+          args: Prisma.TempVoiceChannelDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TempVoiceChannelUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TempVoiceChannelUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>[]
+        }
+        upsert: {
+          args: Prisma.TempVoiceChannelUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TempVoiceChannelPayload>
+        }
+        aggregate: {
+          args: Prisma.TempVoiceChannelAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTempVoiceChannel>
+        }
+        groupBy: {
+          args: Prisma.TempVoiceChannelGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TempVoiceChannelGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TempVoiceChannelCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TempVoiceChannelCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -613,6 +913,58 @@ export const GuildConfigScalarFieldEnum = {
 } as const
 
 export type GuildConfigScalarFieldEnum = (typeof GuildConfigScalarFieldEnum)[keyof typeof GuildConfigScalarFieldEnum]
+
+
+export const TempVoiceSystemScalarFieldEnum = {
+  id: 'id',
+  guildId: 'guildId',
+  name: 'name',
+  categoryId: 'categoryId',
+  enabled: 'enabled',
+  deleteDelay: 'deleteDelay',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TempVoiceSystemScalarFieldEnum = (typeof TempVoiceSystemScalarFieldEnum)[keyof typeof TempVoiceSystemScalarFieldEnum]
+
+
+export const TempVoiceJoinChannelScalarFieldEnum = {
+  id: 'id',
+  channelId: 'channelId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  systemId: 'systemId'
+} as const
+
+export type TempVoiceJoinChannelScalarFieldEnum = (typeof TempVoiceJoinChannelScalarFieldEnum)[keyof typeof TempVoiceJoinChannelScalarFieldEnum]
+
+
+export const TempVoiceTemplateScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  nameTemplate: 'nameTemplate',
+  userLimit: 'userLimit',
+  bitrate: 'bitrate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  systemId: 'systemId'
+} as const
+
+export type TempVoiceTemplateScalarFieldEnum = (typeof TempVoiceTemplateScalarFieldEnum)[keyof typeof TempVoiceTemplateScalarFieldEnum]
+
+
+export const TempVoiceChannelScalarFieldEnum = {
+  id: 'id',
+  systemId: 'systemId',
+  channelId: 'channelId',
+  ownerId: 'ownerId',
+  templateType: 'templateType',
+  createdAt: 'createdAt',
+  lastActiveAt: 'lastActiveAt'
+} as const
+
+export type TempVoiceChannelScalarFieldEnum = (typeof TempVoiceChannelScalarFieldEnum)[keyof typeof TempVoiceChannelScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -684,6 +1036,27 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'TempVoiceType'
+ */
+export type EnumTempVoiceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TempVoiceType'>
+    
+
+
+/**
+ * Reference to a field of type 'TempVoiceType[]'
+ */
+export type ListEnumTempVoiceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TempVoiceType[]'>
     
 
 
@@ -797,6 +1170,10 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   birthday?: Prisma.BirthdayOmit
   guildConfig?: Prisma.GuildConfigOmit
+  tempVoiceSystem?: Prisma.TempVoiceSystemOmit
+  tempVoiceJoinChannel?: Prisma.TempVoiceJoinChannelOmit
+  tempVoiceTemplate?: Prisma.TempVoiceTemplateOmit
+  tempVoiceChannel?: Prisma.TempVoiceChannelOmit
 }
 
 /* Types for Logging */

@@ -164,6 +164,36 @@ export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
 }
 
+export type BoolFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
+}
+
+export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type EnumTempVoiceTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.TempVoiceType | Prisma.EnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.TempVoiceType[] | Prisma.ListEnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TempVoiceType[] | Prisma.ListEnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTempVoiceTypeFilter<$PrismaModel> | $Enums.TempVoiceType
+}
+
+export type EnumTempVoiceTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TempVoiceType | Prisma.EnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.TempVoiceType[] | Prisma.ListEnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TempVoiceType[] | Prisma.ListEnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTempVoiceTypeWithAggregatesFilter<$PrismaModel> | $Enums.TempVoiceType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTempVoiceTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTempVoiceTypeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -325,6 +355,36 @@ export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedStringNullableFilter<$PrismaModel>
   _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
+}
+
+export type NestedBoolFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
+}
+
+export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type NestedEnumTempVoiceTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.TempVoiceType | Prisma.EnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.TempVoiceType[] | Prisma.ListEnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TempVoiceType[] | Prisma.ListEnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTempVoiceTypeFilter<$PrismaModel> | $Enums.TempVoiceType
+}
+
+export type NestedEnumTempVoiceTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TempVoiceType | Prisma.EnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.TempVoiceType[] | Prisma.ListEnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TempVoiceType[] | Prisma.ListEnumTempVoiceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTempVoiceTypeWithAggregatesFilter<$PrismaModel> | $Enums.TempVoiceType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTempVoiceTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTempVoiceTypeFilter<$PrismaModel>
 }
 
 

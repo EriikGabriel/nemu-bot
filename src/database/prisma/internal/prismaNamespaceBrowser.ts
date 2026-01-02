@@ -52,7 +52,11 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Birthday: 'Birthday',
-  GuildConfig: 'GuildConfig'
+  GuildConfig: 'GuildConfig',
+  TempVoiceSystem: 'TempVoiceSystem',
+  TempVoiceJoinChannel: 'TempVoiceJoinChannel',
+  TempVoiceTemplate: 'TempVoiceTemplate',
+  TempVoiceChannel: 'TempVoiceChannel'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -92,6 +96,58 @@ export const GuildConfigScalarFieldEnum = {
 } as const
 
 export type GuildConfigScalarFieldEnum = (typeof GuildConfigScalarFieldEnum)[keyof typeof GuildConfigScalarFieldEnum]
+
+
+export const TempVoiceSystemScalarFieldEnum = {
+  id: 'id',
+  guildId: 'guildId',
+  name: 'name',
+  categoryId: 'categoryId',
+  enabled: 'enabled',
+  deleteDelay: 'deleteDelay',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TempVoiceSystemScalarFieldEnum = (typeof TempVoiceSystemScalarFieldEnum)[keyof typeof TempVoiceSystemScalarFieldEnum]
+
+
+export const TempVoiceJoinChannelScalarFieldEnum = {
+  id: 'id',
+  channelId: 'channelId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  systemId: 'systemId'
+} as const
+
+export type TempVoiceJoinChannelScalarFieldEnum = (typeof TempVoiceJoinChannelScalarFieldEnum)[keyof typeof TempVoiceJoinChannelScalarFieldEnum]
+
+
+export const TempVoiceTemplateScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  nameTemplate: 'nameTemplate',
+  userLimit: 'userLimit',
+  bitrate: 'bitrate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  systemId: 'systemId'
+} as const
+
+export type TempVoiceTemplateScalarFieldEnum = (typeof TempVoiceTemplateScalarFieldEnum)[keyof typeof TempVoiceTemplateScalarFieldEnum]
+
+
+export const TempVoiceChannelScalarFieldEnum = {
+  id: 'id',
+  systemId: 'systemId',
+  channelId: 'channelId',
+  ownerId: 'ownerId',
+  templateType: 'templateType',
+  createdAt: 'createdAt',
+  lastActiveAt: 'lastActiveAt'
+} as const
+
+export type TempVoiceChannelScalarFieldEnum = (typeof TempVoiceChannelScalarFieldEnum)[keyof typeof TempVoiceChannelScalarFieldEnum]
 
 
 export const SortOrder = {

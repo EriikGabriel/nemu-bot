@@ -19,9 +19,70 @@ model Birthday {
 }
 
 model GuildConfig {
-  guildId           String   @id
+  guildId           String            @id
   birthdayChannelId String?
   birthdayRoleId    String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  tempVoiceSystems  TempVoiceSystem[]
+}
+
+model TempVoiceSystem {
+  id          String                 @id @default(uuid())
+  guildId     String
+  name        String                 @unique
+  categoryId  String
+  enabled     Boolean                @default(true)
+  deleteDelay Int                    @default(0)
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+  channels    TempVoiceChannel[]
+  joins       TempVoiceJoinChannel[]
+  guild       GuildConfig            @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  templates   TempVoiceTemplate[]
+
+  @@index([guildId])
+}
+
+model TempVoiceJoinChannel {
+  id        String          @id @default(uuid())
+  channelId String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  systemId  String
+  system    TempVoiceSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)
+
+  @@unique([systemId, channelId])
+}
+
+model TempVoiceTemplate {
+  id           String          @id @default(uuid())
+  type         TempVoiceType
+  nameTemplate String
+  userLimit    Int?
+  bitrate      Int?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  systemId     String
+  system       TempVoiceSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)
+
+  @@unique([systemId, type])
+}
+
+model TempVoiceChannel {
+  id           String          @id @default(uuid())
+  systemId     String
+  channelId    String          @unique
+  ownerId      String
+  templateType TempVoiceType
+  createdAt    DateTime        @default(now())
+  lastActiveAt DateTime        @default(now())
+  system       TempVoiceSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)
+
+  @@index([systemId])
+}
+
+enum TempVoiceType {
+  GAMES
+  QUARTINHOS
 }

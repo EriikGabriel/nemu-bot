@@ -9,7 +9,9 @@
 * 🟢 You can import this file directly.
 */
 
+export const TempVoiceType = {
+  GAMES: 'GAMES',
+  QUARTINHOS: 'QUARTINHOS'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type TempVoiceType = (typeof TempVoiceType)[keyof typeof TempVoiceType]

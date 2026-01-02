@@ -10,4 +10,8 @@
  */
 export type * from './models/Birthday.js'
 export type * from './models/GuildConfig.js'
+export type * from './models/TempVoiceSystem.js'
+export type * from './models/TempVoiceJoinChannel.js'
+export type * from './models/TempVoiceTemplate.js'
+export type * from './models/TempVoiceChannel.js'
 export type * from './commonInputTypes.js'

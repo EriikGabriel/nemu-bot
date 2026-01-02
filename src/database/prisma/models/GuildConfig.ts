@@ -182,6 +182,7 @@ export type GuildConfigWhereInput = {
   birthdayRoleId?: Prisma.StringNullableFilter<"GuildConfig"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GuildConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GuildConfig"> | Date | string
+  tempVoiceSystems?: Prisma.TempVoiceSystemListRelationFilter
 }
 
 export type GuildConfigOrderByWithRelationInput = {
@@ -190,6 +191,7 @@ export type GuildConfigOrderByWithRelationInput = {
   birthdayRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  tempVoiceSystems?: Prisma.TempVoiceSystemOrderByRelationAggregateInput
 }
 
 export type GuildConfigWhereUniqueInput = Prisma.AtLeast<{
@@ -201,6 +203,7 @@ export type GuildConfigWhereUniqueInput = Prisma.AtLeast<{
   birthdayRoleId?: Prisma.StringNullableFilter<"GuildConfig"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GuildConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GuildConfig"> | Date | string
+  tempVoiceSystems?: Prisma.TempVoiceSystemListRelationFilter
 }, "guildId">
 
 export type GuildConfigOrderByWithAggregationInput = {
@@ -231,6 +234,7 @@ export type GuildConfigCreateInput = {
   birthdayRoleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tempVoiceSystems?: Prisma.TempVoiceSystemCreateNestedManyWithoutGuildInput
 }
 
 export type GuildConfigUncheckedCreateInput = {
@@ -239,6 +243,7 @@ export type GuildConfigUncheckedCreateInput = {
   birthdayRoleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tempVoiceSystems?: Prisma.TempVoiceSystemUncheckedCreateNestedManyWithoutGuildInput
 }
 
 export type GuildConfigUpdateInput = {
@@ -247,6 +252,7 @@ export type GuildConfigUpdateInput = {
   birthdayRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tempVoiceSystems?: Prisma.TempVoiceSystemUpdateManyWithoutGuildNestedInput
 }
 
 export type GuildConfigUncheckedUpdateInput = {
@@ -255,6 +261,7 @@ export type GuildConfigUncheckedUpdateInput = {
   birthdayRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tempVoiceSystems?: Prisma.TempVoiceSystemUncheckedUpdateManyWithoutGuildNestedInput
 }
 
 export type GuildConfigCreateManyInput = {
@@ -305,10 +312,106 @@ export type GuildConfigMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type GuildConfigScalarRelationFilter = {
+  is?: Prisma.GuildConfigWhereInput
+  isNot?: Prisma.GuildConfigWhereInput
+}
+
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type GuildConfigCreateNestedOneWithoutTempVoiceSystemsInput = {
+  create?: Prisma.XOR<Prisma.GuildConfigCreateWithoutTempVoiceSystemsInput, Prisma.GuildConfigUncheckedCreateWithoutTempVoiceSystemsInput>
+  connectOrCreate?: Prisma.GuildConfigCreateOrConnectWithoutTempVoiceSystemsInput
+  connect?: Prisma.GuildConfigWhereUniqueInput
+}
+
+export type GuildConfigUpdateOneRequiredWithoutTempVoiceSystemsNestedInput = {
+  create?: Prisma.XOR<Prisma.GuildConfigCreateWithoutTempVoiceSystemsInput, Prisma.GuildConfigUncheckedCreateWithoutTempVoiceSystemsInput>
+  connectOrCreate?: Prisma.GuildConfigCreateOrConnectWithoutTempVoiceSystemsInput
+  upsert?: Prisma.GuildConfigUpsertWithoutTempVoiceSystemsInput
+  connect?: Prisma.GuildConfigWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GuildConfigUpdateToOneWithWhereWithoutTempVoiceSystemsInput, Prisma.GuildConfigUpdateWithoutTempVoiceSystemsInput>, Prisma.GuildConfigUncheckedUpdateWithoutTempVoiceSystemsInput>
+}
+
+export type GuildConfigCreateWithoutTempVoiceSystemsInput = {
+  guildId: string
+  birthdayChannelId?: string | null
+  birthdayRoleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type GuildConfigUncheckedCreateWithoutTempVoiceSystemsInput = {
+  guildId: string
+  birthdayChannelId?: string | null
+  birthdayRoleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type GuildConfigCreateOrConnectWithoutTempVoiceSystemsInput = {
+  where: Prisma.GuildConfigWhereUniqueInput
+  create: Prisma.XOR<Prisma.GuildConfigCreateWithoutTempVoiceSystemsInput, Prisma.GuildConfigUncheckedCreateWithoutTempVoiceSystemsInput>
+}
+
+export type GuildConfigUpsertWithoutTempVoiceSystemsInput = {
+  update: Prisma.XOR<Prisma.GuildConfigUpdateWithoutTempVoiceSystemsInput, Prisma.GuildConfigUncheckedUpdateWithoutTempVoiceSystemsInput>
+  create: Prisma.XOR<Prisma.GuildConfigCreateWithoutTempVoiceSystemsInput, Prisma.GuildConfigUncheckedCreateWithoutTempVoiceSystemsInput>
+  where?: Prisma.GuildConfigWhereInput
+}
+
+export type GuildConfigUpdateToOneWithWhereWithoutTempVoiceSystemsInput = {
+  where?: Prisma.GuildConfigWhereInput
+  data: Prisma.XOR<Prisma.GuildConfigUpdateWithoutTempVoiceSystemsInput, Prisma.GuildConfigUncheckedUpdateWithoutTempVoiceSystemsInput>
+}
+
+export type GuildConfigUpdateWithoutTempVoiceSystemsInput = {
+  guildId?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayChannelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdayRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type GuildConfigUncheckedUpdateWithoutTempVoiceSystemsInput = {
+  guildId?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayChannelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdayRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type GuildConfigCountOutputType
+ */
+
+export type GuildConfigCountOutputType = {
+  tempVoiceSystems: number
+}
+
+export type GuildConfigCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tempVoiceSystems?: boolean | GuildConfigCountOutputTypeCountTempVoiceSystemsArgs
+}
+
+/**
+ * GuildConfigCountOutputType without action
+ */
+export type GuildConfigCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GuildConfigCountOutputType
+   */
+  select?: Prisma.GuildConfigCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * GuildConfigCountOutputType without action
+ */
+export type GuildConfigCountOutputTypeCountTempVoiceSystemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TempVoiceSystemWhereInput
+}
 
 
 export type GuildConfigSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -317,6 +420,8 @@ export type GuildConfigSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   birthdayRoleId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  tempVoiceSystems?: boolean | Prisma.GuildConfig$tempVoiceSystemsArgs<ExtArgs>
+  _count?: boolean | Prisma.GuildConfigCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guildConfig"]>
 
 export type GuildConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -344,10 +449,18 @@ export type GuildConfigSelectScalar = {
 }
 
 export type GuildConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"guildId" | "birthdayChannelId" | "birthdayRoleId" | "createdAt" | "updatedAt", ExtArgs["result"]["guildConfig"]>
+export type GuildConfigInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tempVoiceSystems?: boolean | Prisma.GuildConfig$tempVoiceSystemsArgs<ExtArgs>
+  _count?: boolean | Prisma.GuildConfigCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type GuildConfigIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type GuildConfigIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $GuildConfigPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "GuildConfig"
-  objects: {}
+  objects: {
+    tempVoiceSystems: Prisma.$TempVoiceSystemPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     guildId: string
     birthdayChannelId: string | null
@@ -748,6 +861,7 @@ readonly fields: GuildConfigFieldRefs;
  */
 export interface Prisma__GuildConfigClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  tempVoiceSystems<T extends Prisma.GuildConfig$tempVoiceSystemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GuildConfig$tempVoiceSystemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TempVoiceSystemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -799,6 +913,10 @@ export type GuildConfigFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
+  /**
    * Filter, which GuildConfig to fetch.
    */
   where: Prisma.GuildConfigWhereUniqueInput
@@ -817,6 +935,10 @@ export type GuildConfigFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
+  /**
    * Filter, which GuildConfig to fetch.
    */
   where: Prisma.GuildConfigWhereUniqueInput
@@ -834,6 +956,10 @@ export type GuildConfigFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the GuildConfig
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
   /**
    * Filter, which GuildConfig to fetch.
    */
@@ -883,6 +1009,10 @@ export type GuildConfigFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
+  /**
    * Filter, which GuildConfig to fetch.
    */
   where?: Prisma.GuildConfigWhereInput
@@ -931,6 +1061,10 @@ export type GuildConfigFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
+  /**
    * Filter, which GuildConfigs to fetch.
    */
   where?: Prisma.GuildConfigWhereInput
@@ -973,6 +1107,10 @@ export type GuildConfigCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the GuildConfig
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
   /**
    * The data needed to create a GuildConfig.
    */
@@ -1021,6 +1159,10 @@ export type GuildConfigUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the GuildConfig
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
   /**
    * The data needed to update a GuildConfig.
    */
@@ -1088,6 +1230,10 @@ export type GuildConfigUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
+  /**
    * The filter to search for the GuildConfig to update in case it exists.
    */
   where: Prisma.GuildConfigWhereUniqueInput
@@ -1114,6 +1260,10 @@ export type GuildConfigDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
+  /**
    * Filter which GuildConfig to delete.
    */
   where: Prisma.GuildConfigWhereUniqueInput
@@ -1134,6 +1284,30 @@ export type GuildConfigDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * GuildConfig.tempVoiceSystems
+ */
+export type GuildConfig$tempVoiceSystemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TempVoiceSystem
+   */
+  select?: Prisma.TempVoiceSystemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TempVoiceSystem
+   */
+  omit?: Prisma.TempVoiceSystemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TempVoiceSystemInclude<ExtArgs> | null
+  where?: Prisma.TempVoiceSystemWhereInput
+  orderBy?: Prisma.TempVoiceSystemOrderByWithRelationInput | Prisma.TempVoiceSystemOrderByWithRelationInput[]
+  cursor?: Prisma.TempVoiceSystemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TempVoiceSystemScalarFieldEnum | Prisma.TempVoiceSystemScalarFieldEnum[]
+}
+
+/**
  * GuildConfig without action
  */
 export type GuildConfigDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1145,4 +1319,8 @@ export type GuildConfigDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the GuildConfig
    */
   omit?: Prisma.GuildConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildConfigInclude<ExtArgs> | null
 }

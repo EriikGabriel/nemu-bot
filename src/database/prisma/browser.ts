@@ -27,3 +27,23 @@ export type Birthday = Prisma.BirthdayModel
  * 
  */
 export type GuildConfig = Prisma.GuildConfigModel
+/**
+ * Model TempVoiceSystem
+ * 
+ */
+export type TempVoiceSystem = Prisma.TempVoiceSystemModel
+/**
+ * Model TempVoiceJoinChannel
+ * 
+ */
+export type TempVoiceJoinChannel = Prisma.TempVoiceJoinChannelModel
+/**
+ * Model TempVoiceTemplate
+ * 
+ */
+export type TempVoiceTemplate = Prisma.TempVoiceTemplateModel
+/**
+ * Model TempVoiceChannel
+ * 
+ */
+export type TempVoiceChannel = Prisma.TempVoiceChannelModel

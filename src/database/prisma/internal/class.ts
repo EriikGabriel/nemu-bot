@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/database/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Birthday {\n  userId    String   @id\n  day       Int\n  month     Int\n  year      Int?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([month, day])\n}\n\nmodel GuildConfig {\n  guildId           String   @id\n  birthdayChannelId String?\n  birthdayRoleId    String?\n  createdAt         DateTime @default(now())\n  updatedAt         DateTime @updatedAt\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/database/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Birthday {\n  userId    String   @id\n  day       Int\n  month     Int\n  year      Int?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([month, day])\n}\n\nmodel GuildConfig {\n  guildId           String            @id\n  birthdayChannelId String?\n  birthdayRoleId    String?\n  createdAt         DateTime          @default(now())\n  updatedAt         DateTime          @updatedAt\n  tempVoiceSystems  TempVoiceSystem[]\n}\n\nmodel TempVoiceSystem {\n  id          String                 @id @default(uuid())\n  guildId     String\n  name        String                 @unique\n  categoryId  String\n  enabled     Boolean                @default(true)\n  deleteDelay Int                    @default(0)\n  createdAt   DateTime               @default(now())\n  updatedAt   DateTime               @updatedAt\n  channels    TempVoiceChannel[]\n  joins       TempVoiceJoinChannel[]\n  guild       GuildConfig            @relation(fields: [guildId], references: [guildId], onDelete: Cascade)\n  templates   TempVoiceTemplate[]\n\n  @@index([guildId])\n}\n\nmodel TempVoiceJoinChannel {\n  id        String          @id @default(uuid())\n  channelId String\n  createdAt DateTime        @default(now())\n  updatedAt DateTime        @updatedAt\n  systemId  String\n  system    TempVoiceSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)\n\n  @@unique([systemId, channelId])\n}\n\nmodel TempVoiceTemplate {\n  id           String          @id @default(uuid())\n  type         TempVoiceType\n  nameTemplate String\n  userLimit    Int?\n  bitrate      Int?\n  createdAt    DateTime        @default(now())\n  updatedAt    DateTime        @updatedAt\n  systemId     String\n  system       TempVoiceSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)\n\n  @@unique([systemId, type])\n}\n\nmodel TempVoiceChannel {\n  id           String          @id @default(uuid())\n  systemId     String\n  channelId    String          @unique\n  ownerId      String\n  templateType TempVoiceType\n  createdAt    DateTime        @default(now())\n  lastActiveAt DateTime        @default(now())\n  system       TempVoiceSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)\n\n  @@index([systemId])\n}\n\nenum TempVoiceType {\n  GAMES\n  QUARTINHOS\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Birthday\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"day\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"month\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"year\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"GuildConfig\":{\"fields\":[{\"name\":\"guildId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birthdayChannelId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birthdayRoleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Birthday\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"day\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"month\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"year\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"GuildConfig\":{\"fields\":[{\"name\":\"guildId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birthdayChannelId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birthdayRoleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"tempVoiceSystems\",\"kind\":\"object\",\"type\":\"TempVoiceSystem\",\"relationName\":\"GuildConfigToTempVoiceSystem\"}],\"dbName\":null},\"TempVoiceSystem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guildId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"categoryId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"enabled\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"deleteDelay\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"channels\",\"kind\":\"object\",\"type\":\"TempVoiceChannel\",\"relationName\":\"TempVoiceChannelToTempVoiceSystem\"},{\"name\":\"joins\",\"kind\":\"object\",\"type\":\"TempVoiceJoinChannel\",\"relationName\":\"TempVoiceJoinChannelToTempVoiceSystem\"},{\"name\":\"guild\",\"kind\":\"object\",\"type\":\"GuildConfig\",\"relationName\":\"GuildConfigToTempVoiceSystem\"},{\"name\":\"templates\",\"kind\":\"object\",\"type\":\"TempVoiceTemplate\",\"relationName\":\"TempVoiceSystemToTempVoiceTemplate\"}],\"dbName\":null},\"TempVoiceJoinChannel\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"channelId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"systemId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"system\",\"kind\":\"object\",\"type\":\"TempVoiceSystem\",\"relationName\":\"TempVoiceJoinChannelToTempVoiceSystem\"}],\"dbName\":null},\"TempVoiceTemplate\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TempVoiceType\"},{\"name\":\"nameTemplate\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userLimit\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"bitrate\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"systemId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"system\",\"kind\":\"object\",\"type\":\"TempVoiceSystem\",\"relationName\":\"TempVoiceSystemToTempVoiceTemplate\"}],\"dbName\":null},\"TempVoiceChannel\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"systemId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"channelId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ownerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"templateType\",\"kind\":\"enum\",\"type\":\"TempVoiceType\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"lastActiveAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"system\",\"kind\":\"object\",\"type\":\"TempVoiceSystem\",\"relationName\":\"TempVoiceChannelToTempVoiceSystem\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -193,6 +193,46 @@ export interface PrismaClient<
     * ```
     */
   get guildConfig(): Prisma.GuildConfigDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.tempVoiceSystem`: Exposes CRUD operations for the **TempVoiceSystem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TempVoiceSystems
+    * const tempVoiceSystems = await prisma.tempVoiceSystem.findMany()
+    * ```
+    */
+  get tempVoiceSystem(): Prisma.TempVoiceSystemDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.tempVoiceJoinChannel`: Exposes CRUD operations for the **TempVoiceJoinChannel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TempVoiceJoinChannels
+    * const tempVoiceJoinChannels = await prisma.tempVoiceJoinChannel.findMany()
+    * ```
+    */
+  get tempVoiceJoinChannel(): Prisma.TempVoiceJoinChannelDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.tempVoiceTemplate`: Exposes CRUD operations for the **TempVoiceTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TempVoiceTemplates
+    * const tempVoiceTemplates = await prisma.tempVoiceTemplate.findMany()
+    * ```
+    */
+  get tempVoiceTemplate(): Prisma.TempVoiceTemplateDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.tempVoiceChannel`: Exposes CRUD operations for the **TempVoiceChannel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TempVoiceChannels
+    * const tempVoiceChannels = await prisma.tempVoiceChannel.findMany()
+    * ```
+    */
+  get tempVoiceChannel(): Prisma.TempVoiceChannelDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {
