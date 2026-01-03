@@ -196,16 +196,15 @@ export type TempVoiceJoinChannelOrderByWithRelationInput = {
 
 export type TempVoiceJoinChannelWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  systemId_channelId?: Prisma.TempVoiceJoinChannelSystemIdChannelIdCompoundUniqueInput
+  channelId?: string
   AND?: Prisma.TempVoiceJoinChannelWhereInput | Prisma.TempVoiceJoinChannelWhereInput[]
   OR?: Prisma.TempVoiceJoinChannelWhereInput[]
   NOT?: Prisma.TempVoiceJoinChannelWhereInput | Prisma.TempVoiceJoinChannelWhereInput[]
-  channelId?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
   createdAt?: Prisma.DateTimeFilter<"TempVoiceJoinChannel"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TempVoiceJoinChannel"> | Date | string
   systemId?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
   system?: Prisma.XOR<Prisma.TempVoiceSystemScalarRelationFilter, Prisma.TempVoiceSystemWhereInput>
-}, "id" | "systemId_channelId">
+}, "id" | "channelId">
 
 export type TempVoiceJoinChannelOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -292,11 +291,6 @@ export type TempVoiceJoinChannelListRelationFilter = {
 
 export type TempVoiceJoinChannelOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type TempVoiceJoinChannelSystemIdChannelIdCompoundUniqueInput = {
-  systemId: string
-  channelId: string
 }
 
 export type TempVoiceJoinChannelCountOrderByAggregateInput = {

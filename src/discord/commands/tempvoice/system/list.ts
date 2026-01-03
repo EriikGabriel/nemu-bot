@@ -1,5 +1,5 @@
 import { prisma } from "#database"
-import { brBuilder, createEmbed, createSeparator } from "@magicyan/discord"
+import { brBuilder, createEmbed } from "@magicyan/discord"
 import group from "./group.js"
 
 group.subcommand({
@@ -34,12 +34,13 @@ group.subcommand({
           const category = guild.channels.cache.get(system.categoryId)
           const categoryName = category?.name || "Categoria não encontrada"
           const separator =
-            index < systems.length - 1 ? createSeparator(true) : ""
+            index < systems.length - 1 ? "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" : ""
 
           return brBuilder(
             `**${system.name}**:  ${status}`,
             `└📁 Categoria: ${categoryName}`,
-            `└⏱️ Delay: ${system.deleteDelay}s`
+            `└⏱️ Delay: ${system.deleteDelay}s`,
+            separator
           )
         })
       ),
