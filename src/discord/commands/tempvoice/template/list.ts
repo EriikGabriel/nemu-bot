@@ -1,5 +1,10 @@
+import {
+  createNoTemplatesInSystemContainer,
+  createSystemNotFoundContainer,
+  createTemplateListContainer,
+} from "#components"
 import { prisma } from "#database"
-import { brBuilder, createEmbed } from "@magicyan/discord"
+import { brBuilder } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"
 
@@ -16,6 +21,8 @@ group.subcommand({
   ],
 
   async run(interaction) {
+    await interaction.deferReply({ flags: ["Ephemeral"] })
+
     const { options, guild } = interaction
 
     const systemName = options.getString("system", true)
@@ -35,67 +42,59 @@ group.subcommand({
     })
 
     if (!system) {
-      const embed = createEmbed({
-        description: [
-          `❌ Sistema de canais temporários \`${systemName}\` não encontrado.`,
-          "Para ver a lista de sistemas, use o comando `/tempvoice system list`.",
-        ],
-        color: constants.colors.danger,
-      })
+      const container = createSystemNotFoundContainer(systemName)
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.editReply({
+        flags: ["IsComponentsV2"],
+        components: [container],
+      })
 
       return
     }
 
     if (system.templates.length === 0) {
-      const embed = createEmbed({
-        description: `❌ Nenhum template configurado no sistema \`${systemName}\`.`,
-        color: constants.colors.warning,
-      })
+      const container = createNoTemplatesInSystemContainer(systemName)
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.editReply({
+        flags: ["IsComponentsV2"],
+        components: [container],
+      })
 
       return
     }
 
-    const embed = createEmbed({
-      title: `📋 Templates do Sistema: ${system.name}`,
-      description: brBuilder(
-        ...system.templates.map((template, index) => {
-          const icon = template.type === "GAMES" ? "🎮" : "🏠"
-          const userLimit = template.userLimit
-            ? `${template.userLimit} usuários`
-            : "Sem limite"
-          const bitrate = template.bitrate
-            ? `${template.bitrate / 1000}kbps`
-            : "Padrão"
-          const separator =
-            index < system.templates.length - 1
-              ? "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-              : ""
+    const templatesInfo = system.templates
+      .map((template, index) => {
+        const icon = template.type === "GAMES" ? "🎮" : "🏠"
+        const userLimit = template.userLimit
+          ? `${template.userLimit} usuários`
+          : "Sem limite"
+        const bitrate = template.bitrate
+          ? `${template.bitrate / 1000}kbps`
+          : "Padrão"
+        const separator =
+          index < system.templates.length - 1
+            ? "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            : ""
 
-          return brBuilder(
-            `${icon} **${template.type}**`,
-            `└📝 Nome: ${template.nameTemplate}`,
-            `└👥 Limite: ${userLimit}`,
-            `└🎵 Bitrate: ${bitrate}`,
-            separator
-          )
-        })
-      ),
-      color: constants.colors.pumping,
-      timestamp: new Date(),
-      footer: {
-        text: `Total: ${system.templates.length} template${
-          system.templates.length !== 1 ? "s" : ""
-        }`,
-      },
-    })
+        return brBuilder(
+          `${icon} **${template.type}**`,
+          `└📝 Nome: ${template.nameTemplate}`,
+          `└👥 Limite: ${userLimit}`,
+          `└🎵 Bitrate: ${bitrate}`,
+          separator
+        )
+      })
+      .join("\n")
 
-    await interaction.reply({
+    const embed = createTemplateListContainer(
+      system.name,
+      templatesInfo,
+      system.templates.length
+    )
+
+    await interaction.editReply({
       embeds: [embed],
-      ephemeral: true,
     })
 
     return

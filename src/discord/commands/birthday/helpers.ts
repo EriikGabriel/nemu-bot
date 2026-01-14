@@ -1,5 +1,4 @@
 import { months } from "#types"
-import { createEmbed } from "@magicyan/discord"
 
 /**
  * Formata uma data de aniversário
@@ -10,22 +9,6 @@ export function formatBirthdayDate(
   year?: number | null
 ): string {
   return `${day} de ${months[month]}${year ? ` de ${year}` : ""}`
-}
-
-/**
- * Cria um embed base para aniversário
- */
-export function createBirthdayEmbed(
-  title: string,
-  description: string,
-  color: `#${string}` = constants.colors.pumping as `#${string}`
-) {
-  return createEmbed({
-    title,
-    description,
-    color,
-    thumbnail: { url: constants.images.cake },
-  })
 }
 
 /**

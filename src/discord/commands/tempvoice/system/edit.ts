@@ -1,12 +1,13 @@
-import { prisma } from "#database"
 import {
   createCategorySelect,
   createDeleteDelayInput,
   createNameInput,
 } from "#commands/tempvoice/system/helpers.js"
+import { prisma } from "#database"
 import { createModalFields } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"
+import { createSystemNotFoundContainer } from "#components"
 
 group.subcommand({
   name: "edit",
@@ -32,9 +33,11 @@ group.subcommand({
     })
 
     if (!system) {
+      const container = createSystemNotFoundContainer(systemName)
+
       await interaction.reply({
-        content: `❌ | Sistema de canais temporários \`${systemName}\` não encontrado.`,
-        ephemeral: true,
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
       return
     }

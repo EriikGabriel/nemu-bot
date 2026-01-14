@@ -1,12 +1,9 @@
+import { createBirthdaySetContainer } from "#components"
 import { prisma } from "#database"
 import { brBuilder } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import { command } from "./command.js"
-import {
-  createBirthdayEmbed,
-  createMonthChoices,
-  formatBirthdayDate,
-} from "./helpers.js"
+import { createMonthChoices, formatBirthdayDate } from "./helpers.js"
 
 command.subcommand({
   name: "set",
@@ -104,11 +101,11 @@ command.subcommand({
       )
     }
 
-    const embed = createBirthdayEmbed("Aniversário", description)
+    const container = createBirthdaySetContainer(description)
 
     await interaction.reply({
-      flags: ["Ephemeral"],
-      embeds: [embed],
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
       allowedMentions: { parse: [] },
     })
   },

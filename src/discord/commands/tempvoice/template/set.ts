@@ -3,8 +3,9 @@ import {
   createNameTemplateInput,
   createUserLimitInput,
 } from "#commands/tempvoice/template/helpers.js"
+import { createSystemNotFoundContainer } from "#components"
 import { prisma } from "#database"
-import { createEmbed, createModalFields } from "@magicyan/discord"
+import { createModalFields } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"
 
@@ -51,15 +52,12 @@ group.subcommand({
     })
 
     if (!system) {
-      const embed = createEmbed({
-        description: [
-          `❌ Sistema de canais temporários \`${systemName}\` não encontrado.`,
-          "Para ver a lista de sistemas, use o comando `/tempvoice system list`.",
-        ],
-        color: constants.colors.danger,
-      })
+      const container = createSystemNotFoundContainer(systemName)
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
 
       return
     }

@@ -1,8 +1,7 @@
+import { createBirthdayChannelConfiguredContainer } from "#components"
 import { prisma } from "#database"
-import { brBuilder } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import { command } from "./command.js"
-import { createBirthdayEmbed } from "./helpers.js"
 
 command.subcommand({
   name: "channel",
@@ -55,16 +54,13 @@ command.subcommand({
       return
     }
 
-    const description = brBuilder(
-      "**Canal de anúncios de aniversário definido**",
-      `Os anúncios de aniversário serão enviados em ${channel}.`
+    const container = createBirthdayChannelConfiguredContainer(
+      channel.toString()
     )
 
-    const embed = createBirthdayEmbed("Canal Configurado", description)
-
     await interaction.reply({
-      embeds: [embed],
-      flags: ["Ephemeral"],
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
     })
   },
 })

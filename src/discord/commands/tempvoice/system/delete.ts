@@ -1,3 +1,4 @@
+import { createSystemDeletedContainer } from "#components"
 import { prisma } from "#database"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"
@@ -19,16 +20,18 @@ group.subcommand({
 
     const systemName = options.getString("name", true)
 
-    prisma.tempVoiceSystem.delete({
+    await prisma.tempVoiceSystem.delete({
       where: {
         guildId: guild.id,
         name: systemName,
       },
     })
 
+    const container = createSystemDeletedContainer(systemName)
+
     await interaction.reply({
-      content: `✅ | Sistema de canais temporários \`${systemName}\` deletado com sucesso.`,
-      ephemeral: true,
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
     })
 
     return

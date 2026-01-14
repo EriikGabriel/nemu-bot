@@ -3,9 +3,15 @@ import {
   isValidNumber,
   parseDelay,
 } from "#commands/tempvoice/system/helpers.js"
+import {
+  createSystemCreatedContainer,
+  createSystemEditedContainer,
+  createSystemIdNotFoundContainer,
+} from "#components"
 import { prisma } from "#database"
 import { SelectInputModalData } from "#types"
 import { ResponderType } from "@constatic/base"
+import { brBuilder, createContainer, createSection } from "@magicyan/discord"
 import { ModalSubmitInteraction } from "discord.js"
 
 type FormData = {
@@ -30,21 +36,25 @@ const handleCreate: ActionHandler = async (interaction, data) => {
     },
   })
 
+  const container = createSystemCreatedContainer(
+    data.name,
+    `<#${data.category}>`,
+    data.delayValue || "0 segundos (padrão)"
+  )
+
   await interaction.reply({
-    content: `✅ Sistema criado com sucesso!\nNome: ${
-      data.name
-    }\nCategoria: <#${data.category}>\nDelay: ${
-      data.delayValue || "Padrão (0 segundos)"
-    }`,
-    flags: ["Ephemeral"],
+    flags: ["IsComponentsV2", "Ephemeral"],
+    components: [container],
   })
 }
 
 const handleEdit: ActionHandler = async (interaction, data, systemId) => {
   if (!systemId) {
+    const container = createSystemIdNotFoundContainer()
+
     await interaction.reply({
-      content: "❌ ID do sistema não encontrado.",
-      flags: ["Ephemeral"],
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
     })
     return
   }
@@ -60,13 +70,15 @@ const handleEdit: ActionHandler = async (interaction, data, systemId) => {
     },
   })
 
+  const container = createSystemEditedContainer(
+    data.name,
+    `<#${data.category}>`,
+    data.delayValue || "0 segundos (padrão)"
+  )
+
   await interaction.reply({
-    content: `✅ Sistema atualizado com sucesso!\nNome: ${
-      data.name
-    }\nCategoria: <#${data.category}>\nDelay: ${
-      data.delayValue || "Padrão (0 segundos)"
-    }`,
-    flags: ["Ephemeral"],
+    flags: ["IsComponentsV2", "Ephemeral"],
+    components: [container],
   })
 }
 
@@ -89,9 +101,22 @@ createResponder({
     }
 
     if (formData.delayValue && !isValidNumber(formData.delayValue)) {
+      const container = createContainer(
+        "#e74c3c",
+        createSection({
+          content: brBuilder(
+            "## ❌ Erro de Validação",
+            "O campo de delay deve ser um número válido.",
+            "",
+            "Exemplo: `5` para 5 segundos"
+          ),
+          thumbnail: "https://i.imgur.com/GjNu2Gv.png",
+        })
+      )
+
       await interaction.reply({
-        content: "❌ O campo de delay deve ser um número válido.",
-        flags: ["Ephemeral"],
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
       return
     }
@@ -99,9 +124,22 @@ createResponder({
     const handler = actionHandlers[action]
 
     if (!handler) {
+      const container = createContainer(
+        "#e74c3c",
+        createSection({
+          content: brBuilder(
+            "## ❌ Erro Interno",
+            `Ação \`${action}\` não reconhecida.`,
+            "",
+            "Por favor, tente novamente."
+          ),
+          thumbnail: "https://i.imgur.com/GjNu2Gv.png",
+        })
+      )
+
       await interaction.reply({
-        content: `❌ Ação \`${action}\` não reconhecida.`,
-        flags: ["Ephemeral"],
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
       return
     }

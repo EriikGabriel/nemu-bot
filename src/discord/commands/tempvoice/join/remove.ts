@@ -1,3 +1,7 @@
+import {
+  createJoinChannelNotFoundContainer,
+  createJoinChannelRemovedContainer,
+} from "#components"
 import { prisma } from "#database"
 import { ApplicationCommandOptionType, ChannelType } from "discord.js"
 import group from "./group.js"
@@ -30,9 +34,13 @@ group.subcommand({
     })
 
     if (!tempJoinVoice || tempJoinVoice.system.guildId !== guild.id) {
+      const container = createJoinChannelNotFoundContainer(
+        joinChannel.toString()
+      )
+
       await interaction.reply({
-        content: `❌ | O canal <#${joinChannel.id}> não está configurado como canal de entrada para canais temporários neste servidor.`,
-        ephemeral: true,
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
       return
     }
@@ -45,9 +53,14 @@ group.subcommand({
       },
     })
 
+    const container = createJoinChannelRemovedContainer(
+      joinChannel.toString(),
+      systemName
+    )
+
     await interaction.reply({
-      content: `✅ | Canal <#${joinChannel.id}> removido como canal de entrada do sistema de canais temporários \`${systemName}\`.`,
-      ephemeral: true,
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
     })
 
     return

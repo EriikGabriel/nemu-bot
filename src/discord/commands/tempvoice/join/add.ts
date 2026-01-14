@@ -1,5 +1,10 @@
+import {
+  createJoinChannelAddedContainer,
+  createSystemNotFoundContainer,
+  createTemplateNotFoundContainer,
+} from "#components"
 import { prisma } from "#database"
-import { createEmbed } from "@magicyan/discord"
+import { brBuilder, createContainer, createSection } from "@magicyan/discord"
 import { ApplicationCommandOptionType, ChannelType } from "discord.js"
 import group from "./group.js"
 
@@ -59,29 +64,26 @@ group.subcommand({
     })
 
     if (!system) {
-      const embed = createEmbed({
-        description: [
-          `❌ Sistema de canais temporários \`${systemName}\` não encontrado.`,
-          "Para ver a lista de sistemas, use o comando `/tempvoice system list`.",
-        ],
-        color: constants.colors.danger,
-      })
+      const container = createSystemNotFoundContainer(systemName)
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
 
       return
     }
 
     if (system.templates.length === 0) {
-      const embed = createEmbed({
-        description: [
-          `❌ O sistema \`${systemName}\` não possui um template do tipo \`${templateType}\`.`,
-          `Use \`/tempvoice template set\` para criar um template antes.`,
-        ],
-        color: constants.colors.danger,
-      })
+      const container = createTemplateNotFoundContainer(
+        templateType,
+        systemName
+      )
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
 
       return
     }
@@ -96,22 +98,29 @@ group.subcommand({
     })
 
     if (alreadyLinked) {
-      const icon = templateType === "GAMES" ? "🎮" : "🏠"
-      const alreadyIcon = alreadyLinked.templateType === "GAMES" ? "🎮" : "🏠"
-
       // Se já está no mesmo sistema, apenas atualizar o tipo
       if (alreadyLinked.systemId === system.id) {
         if (alreadyLinked.templateType === templateType) {
-          const embed = createEmbed({
-            description: [
-              `⚠️ O canal ${joinChannel} já está configurado exatamente assim:`,
-              `${icon} **Tipo:** ${templateType}`,
-              `**Sistema:** ${systemName}`,
-            ],
-            color: constants.colors.warning,
-          })
+          const container = createContainer(
+            "#f39c12",
+            createSection({
+              content: brBuilder(
+                "## ⚠️ Canal Já Configurado",
+                `O canal ${joinChannel} já está configurado exatamente assim.`,
+                "",
+                `**Sistema:** ${systemName}`,
+                `**Template:** ${templateType}`,
+                "",
+                "Não é necessário fazer nenhuma alteração."
+              ),
+              thumbnail: "https://i.imgur.com/GjNu2Gv.png",
+            })
+          )
 
-          await interaction.reply({ embeds: [embed], ephemeral: true })
+          await interaction.reply({
+            flags: ["IsComponentsV2", "Ephemeral"],
+            components: [container],
+          })
           return
         }
 
@@ -121,26 +130,47 @@ group.subcommand({
           data: { templateType },
         })
 
-        const embed = createEmbed({
-          description: [
-            `✅ Canal ${joinChannel} atualizado!`,
-            `${alreadyIcon} ${alreadyLinked.templateType} → ${icon} ${templateType}`,
-            `**Sistema:** ${systemName}`,
-          ],
-          color: constants.colors.success,
-        })
+        const container = createContainer(
+          "#2ecc71",
+          createSection({
+            content: brBuilder(
+              "## ✅ Canal Atualizado",
+              `O canal ${joinChannel} foi atualizado com sucesso!`,
+              "",
+              `**Sistema:** ${systemName}`,
+              `**Template:** ${alreadyLinked.templateType} → ${templateType}`,
+              "",
+              "O template será aplicado quando alguém entrar no canal."
+            ),
+            thumbnail: "https://i.imgur.com/GjNu2Gv.png",
+          })
+        )
 
-        await interaction.reply({ embeds: [embed], ephemeral: true })
+        await interaction.reply({
+          flags: ["IsComponentsV2", "Ephemeral"],
+          components: [container],
+        })
         return
       }
 
       // Está vinculado a outro sistema
-      const embed = createEmbed({
-        description: `❌ O canal ${joinChannel} já está vinculado ao sistema \`${alreadyLinked.system.name}\`. Remova-o primeiro.`,
-        color: constants.colors.danger,
-      })
+      const container = createContainer(
+        "#e74c3c",
+        createSection({
+          content: brBuilder(
+            "## ❌ Canal Já Vinculado",
+            `O canal ${joinChannel} já está vinculado ao sistema \`${alreadyLinked.system.name}\`.`,
+            "",
+            "Use `/tempvoice join remove` para removê-lo primeiro."
+          ),
+          thumbnail: "https://i.imgur.com/GjNu2Gv.png",
+        })
+      )
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
 
       return
     }
@@ -153,16 +183,15 @@ group.subcommand({
       },
     })
 
-    const icon = templateType === "GAMES" ? "🎮" : "🏠"
-    const embed = createEmbed({
-      description: [
-        `✅ Canal ${joinChannel} adicionado como canal de entrada!`,
-        `${icon} **Tipo:** ${templateType}`,
-        `**Sistema:** ${systemName}`,
-      ],
-      color: constants.colors.success,
-    })
+    const container = createJoinChannelAddedContainer(
+      joinChannel.toString(),
+      systemName,
+      templateType
+    )
 
-    await interaction.reply({ embeds: [embed], ephemeral: true })
+    await interaction.reply({
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
+    })
   },
 })

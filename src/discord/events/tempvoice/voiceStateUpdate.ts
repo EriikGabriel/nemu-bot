@@ -1,5 +1,7 @@
 import { createEvent } from "#base"
+import { createTempVoiceWelcomeContainer } from "#components"
 import { prisma } from "#database"
+import console from "console"
 import {
   ActivityType,
   ChannelType,
@@ -192,6 +194,8 @@ async function handleChannelJoin(
       bitrate: template.bitrate ?? undefined,
     })
 
+    const container = createTempVoiceWelcomeContainer(newChannel, member)
+
     // Salvar o canal no banco de dados
     await prisma.tempVoiceChannel.create({
       data: {
@@ -204,6 +208,15 @@ async function handleChannelJoin(
 
     // Mover o usuário para o novo canal
     await member.voice.setChannel(newChannel)
+
+    try {
+      await newChannel.send({
+        flags: ["IsComponentsV2"],
+        components: [container],
+      })
+    } catch (error) {
+      console.error("[TempVoice] Erro ao enviar embed de boas-vindas:", error)
+    }
 
     console.log(
       `[TempVoice] Canal temporário criado: ${newChannel.name} (${newChannel.id}) para ${member.displayName} no sistema ${system.name}`
@@ -230,7 +243,20 @@ export default createEvent({
     }
 
     // Processar entrada em canal
+    // Não processar se estiver saindo de um canal de join para outro canal
+    // (isso acontece quando o bot move o usuário para o canal temporário)
     if (joinedChannel && joinedChannel.id !== leftChannel?.id) {
+      // Verificar se o canal anterior era um canal de join
+      const wasInJoinChannel = leftChannel
+        ? await prisma.tempVoiceJoinChannel.findUnique({
+            where: { channelId: leftChannel.id },
+          })
+        : null
+
+      // Se estava em um canal de join, não processar a entrada no novo canal
+      // (o usuário foi movido automaticamente pelo bot)
+      if (wasInJoinChannel) return
+
       await handleChannelJoin(member, guild, joinedChannel)
     }
   },

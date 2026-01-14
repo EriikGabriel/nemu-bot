@@ -1,5 +1,9 @@
+import {
+  createNoSystemsFoundContainer,
+  createSystemListContainer,
+} from "#components"
 import { prisma } from "#database"
-import { brBuilder, createEmbed } from "@magicyan/discord"
+import { brBuilder } from "@magicyan/discord"
 import group from "./group.js"
 
 group.subcommand({
@@ -19,43 +23,37 @@ group.subcommand({
     })
 
     if (systems.length === 0) {
+      const container = createNoSystemsFoundContainer()
+
       await interaction.reply({
-        content: "❌ Nenhum sistema de canais temporários encontrado.",
-        ephemeral: true,
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
       return
     }
 
-    const embed = createEmbed({
-      title: "📋 Sistemas de Canais Temporários",
-      description: brBuilder(
-        ...systems.map((system, index) => {
-          const status = system.enabled ? "✅ Ativo" : "❌ Inativo"
-          const category = guild.channels.cache.get(system.categoryId)
-          const categoryName = category?.name || "Categoria não encontrada"
-          const separator =
-            index < systems.length - 1 ? "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" : ""
+    const systemsInfo = systems
+      .map((system, index) => {
+        const status = system.enabled ? "✅ Ativo" : "❌ Inativo"
+        const category = guild.channels.cache.get(system.categoryId)
+        const categoryName = category?.name || "Categoria não encontrada"
+        const separator =
+          index < systems.length - 1 ? "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" : ""
 
-          return brBuilder(
-            `**${system.name}**:  ${status}`,
-            `└📁 Categoria: ${categoryName}`,
-            `└⏱️ Delay: ${system.deleteDelay}s`,
-            separator
-          )
-        })
-      ),
-      color: constants.colors.pumping,
-      timestamp: new Date(),
-      footer: {
-        text: `Total: ${systems.length} sistema${
-          systems.length !== 1 ? "s" : ""
-        }`,
-      },
-    })
+        return brBuilder(
+          `**${system.name}**:  ${status}`,
+          `└📁 Categoria: ${categoryName}`,
+          `└⏱️ Delay: ${system.deleteDelay}s`,
+          separator
+        )
+      })
+      .join("\n")
+
+    const embed = createSystemListContainer(systemsInfo, systems.length)
 
     await interaction.reply({
       embeds: [embed],
-      ephemeral: true,
+      flags: ["Ephemeral"],
     })
 
     return

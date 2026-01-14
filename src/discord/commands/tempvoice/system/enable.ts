@@ -1,3 +1,8 @@
+import {
+  createSystemAlreadyEnabledContainer,
+  createSystemEnabledContainer,
+  createSystemNotFoundContainer,
+} from "#components"
 import { prisma } from "#database"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"
@@ -26,17 +31,21 @@ group.subcommand({
     })
 
     if (!system) {
+      const container = createSystemNotFoundContainer(systemName)
+
       await interaction.reply({
-        content: `❌ Sistema de canais temporários \`${systemName}\` não encontrado.`,
-        ephemeral: true,
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
       return
     }
 
     if (system.enabled) {
+      const container = createSystemAlreadyEnabledContainer(systemName)
+
       await interaction.reply({
-        content: `⚠️ O sistema \`${systemName}\` já está habilitado.`,
-        ephemeral: true,
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
       return
     }
@@ -50,9 +59,11 @@ group.subcommand({
       },
     })
 
+    const container = createSystemEnabledContainer(systemName)
+
     await interaction.reply({
-      content: `✅ Sistema \`${systemName}\` habilitado com sucesso.`,
-      ephemeral: true,
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
     })
 
     return

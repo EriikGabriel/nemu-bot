@@ -19,6 +19,7 @@
       "#types/*": ["./src/@types/*"],
       "#emojis": ["./emojis.json"],
       "#types": ["./src/types/index.ts"],
+      "#components": ["./src/discord/components/index.ts"],
       "#commands/*": ["./src/discord/commands/*"],
       "#responders/*": ["./src/discord/responders/*"],
       "#events/*": ["./src/discord/events/*"]

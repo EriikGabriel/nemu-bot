@@ -1,5 +1,10 @@
+import {
+  createJoinChannelListContainer,
+  createJoinSystemNotFoundContainer,
+  createNoJoinChannelsInSystemContainer,
+} from "#components"
 import { prisma } from "#database"
-import { brBuilder, createEmbed } from "@magicyan/discord"
+import { brBuilder } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"
 
@@ -16,6 +21,8 @@ group.subcommand({
   ],
 
   async run(interaction) {
+    await interaction.deferReply({ flags: ["Ephemeral"] })
+
     const { options, guild } = interaction
 
     const systemName = options.getString("system")
@@ -38,16 +45,13 @@ group.subcommand({
     })
 
     if (systems.length === 0) {
-      const embed = createEmbed({
-        description: systemName
-          ? "❌ Sistema não encontrado."
-          : "❌ Nenhum sistema de canais temporários encontrado.",
-        color: constants.colors.danger,
-      })
+      const container = systemName
+        ? createJoinSystemNotFoundContainer()
+        : createNoJoinChannelsInSystemContainer()
 
-      await interaction.reply({
-        embeds: [embed],
-        ephemeral: true,
+      await interaction.editReply({
+        flags: ["IsComponentsV2"],
+        components: [container],
       })
       return
     }
@@ -57,16 +61,13 @@ group.subcommand({
     )
 
     if (systemsWithChannels.length === 0) {
-      const embed = createEmbed({
-        description: systemName
-          ? "❌ Nenhum canal de entrada encontrado para este sistema."
-          : "❌ Nenhum canal de entrada configurado ainda.",
-        color: constants.colors.danger,
-      })
+      const container = createNoJoinChannelsInSystemContainer(
+        systemName ?? undefined
+      )
 
       await interaction.reply({
-        embeds: [embed],
-        ephemeral: true,
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
       return
     }
@@ -76,46 +77,39 @@ group.subcommand({
       0
     )
 
-    const embed = createEmbed({
-      title: "🎙️ Canais de Entrada para Canais Temporários",
-      description: brBuilder(
-        ...systemsWithChannels.map((system, index) => {
-          const channels = system.joins
-            .map((jc) => {
-              const icon = jc.templateType === "GAMES" ? "🎮" : "🏠"
-              return `  └ ${icon} <#${jc.channelId}> - ${jc.templateType}`
-            })
-            .join("\n")
+    const systemsInfo = systemsWithChannels
+      .map((system, index) => {
+        const channels = system.joins
+          .map((jc) => {
+            const icon = jc.templateType === "GAMES" ? "🎮" : "🏠"
+            return `  └ ${icon} <#${jc.channelId}> - ${jc.templateType}`
+          })
+          .join("\n")
 
-          const separator =
-            index < systemsWithChannels.length - 1
-              ? "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-              : ""
+        const separator =
+          index < systemsWithChannels.length - 1
+            ? "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            : ""
 
-          return brBuilder(
-            `**${system.name}**`,
-            `📁 Categoria: <#${system.categoryId}>`,
-            `⏱️ Delay de exclusão: ${system.deleteDelay}s`,
-            `**Canais de entrada (${system.joins.length}):**`,
-            channels,
-            separator
-          )
-        })
-      ),
-      color: constants.colors.pumping,
-      timestamp: new Date(),
-      footer: {
-        text: `Total: ${totalChannels} canal${
-          totalChannels !== 1 ? "is" : ""
-        } em ${systemsWithChannels.length} sistema${
-          systemsWithChannels.length !== 1 ? "s" : ""
-        }`,
-      },
-    })
+        return brBuilder(
+          `**${system.name}**`,
+          `📁 Categoria: <#${system.categoryId}>`,
+          `⏱️ Delay de exclusão: ${system.deleteDelay}s`,
+          `**Canais de entrada (${system.joins.length}):**`,
+          channels,
+          separator
+        )
+      })
+      .join("\n")
 
-    await interaction.reply({
+    const embed = createJoinChannelListContainer(
+      systemsInfo,
+      totalChannels,
+      systemsWithChannels.length
+    )
+
+    await interaction.editReply({
       embeds: [embed],
-      ephemeral: true,
     })
   },
 })

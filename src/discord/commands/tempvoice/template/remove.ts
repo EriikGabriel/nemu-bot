@@ -1,5 +1,9 @@
+import {
+  createSystemNotFoundContainer,
+  createTemplateNotFoundContainer,
+  createTemplateRemovedContainer,
+} from "#components"
 import { prisma } from "#database"
-import { createEmbed } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"
 
@@ -41,15 +45,12 @@ group.subcommand({
     })
 
     if (!system) {
-      const embed = createEmbed({
-        description: [
-          `❌ Sistema de canais temporários \`${systemName}\` não encontrado.`,
-          "Para ver a lista de sistemas, use o comando `/tempvoice system list`.",
-        ],
-        color: constants.colors.danger,
-      })
+      const container = createSystemNotFoundContainer(systemName)
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
 
       return
     }
@@ -64,12 +65,15 @@ group.subcommand({
     })
 
     if (!template) {
-      const embed = createEmbed({
-        description: `❌ Template do tipo \`${templateType}\` não encontrado no sistema \`${systemName}\`.`,
-        color: constants.colors.danger,
-      })
+      const container = createTemplateNotFoundContainer(
+        templateType,
+        systemName
+      )
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
 
       return
     }
@@ -83,12 +87,12 @@ group.subcommand({
       },
     })
 
-    const embed = createEmbed({
-      description: `✅ Template \`${templateType}\` removido do sistema \`${systemName}\` com sucesso!`,
-      color: constants.colors.success,
-    })
+    const container = createTemplateRemovedContainer(templateType, systemName)
 
-    await interaction.reply({ embeds: [embed], ephemeral: true })
+    await interaction.reply({
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
+    })
 
     return
   },

@@ -1,7 +1,9 @@
+import {
+  createBirthdayNotFoundContainer,
+  createBirthdayRemovedContainer,
+} from "#components"
 import { prisma } from "#database"
-import { brBuilder } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
-import { createBirthdayEmbed } from "./helpers.js"
 import { command } from "./command.js"
 
 command.subcommand({
@@ -39,25 +41,13 @@ command.subcommand({
     const isSelf = user.id === interaction.user.id
     const subject = isSelf ? "Seu aniversário" : `O aniversário de ${user}`
 
-    const description = deleted
-      ? brBuilder(
-          "**Aniversário removido!**",
-          `${subject} foi removido com sucesso.`
-        )
-      : brBuilder(
-          "**Nenhum aniversário encontrado!**",
-          `${subject} não está registrado.`
-        )
-
-    const color = deleted
-      ? (constants.colors.pumping as `#${string}`)
-      : (constants.colors.danger as `#${string}`)
-
-    const embed = createBirthdayEmbed("Aniversário", description, color)
+    const container = deleted
+      ? createBirthdayRemovedContainer(subject)
+      : createBirthdayNotFoundContainer(subject)
 
     await interaction.reply({
-      embeds: [embed],
-      flags: ["Ephemeral"],
+      flags: ["IsComponentsV2", "Ephemeral"],
+      components: [container],
     })
   },
 })

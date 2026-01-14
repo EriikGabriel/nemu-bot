@@ -1,8 +1,9 @@
 import { createResponder } from "#base"
 import { parseOptionalNumber } from "#commands/tempvoice/template/helpers.js"
+import { createTemplateSetContainer } from "#components"
 import { prisma } from "#database"
 import { ResponderType } from "@constatic/base"
-import { createEmbed } from "@magicyan/discord"
+import { brBuilder, createContainer, createSection } from "@magicyan/discord"
 import { ModalSubmitInteraction } from "discord.js"
 
 createResponder({
@@ -28,22 +29,44 @@ createResponder({
 
     // Validações
     if (userLimit !== undefined && (userLimit < 0 || userLimit > 99)) {
-      const embed = createEmbed({
-        description: "❌ O limite de usuários deve estar entre 0 e 99.",
-        color: constants.colors.danger,
-      })
+      const container = createContainer(
+        "#e74c3c",
+        createSection({
+          content: brBuilder(
+            "## ❌ Erro de Validação",
+            "O limite de usuários deve estar entre **0 e 99**.",
+            "",
+            "Tente novamente com um valor válido."
+          ),
+          thumbnail: "https://i.imgur.com/GjNu2Gv.png",
+        })
+      )
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
       return
     }
 
     if (bitrate !== undefined && (bitrate < 8000 || bitrate > 384000)) {
-      const embed = createEmbed({
-        description: "❌ O bitrate deve estar entre 8000 e 384000.",
-        color: constants.colors.danger,
-      })
+      const container = createContainer(
+        "#e74c3c",
+        createSection({
+          content: brBuilder(
+            "## ❌ Erro de Validação",
+            "O bitrate deve estar entre **8000 e 384000**.",
+            "",
+            "Tente novamente com um valor válido."
+          ),
+          thumbnail: "https://i.imgur.com/GjNu2Gv.png",
+        })
+      )
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
       return
     }
 
@@ -72,36 +95,38 @@ createResponder({
         },
       })
 
-      const icon = templateType === "GAMES" ? "🎮" : "🏠"
-      const userLimitText = userLimit ? `${userLimit} usuários` : "Sem limite"
-      const bitrateText = bitrate ? `${bitrate / 1000}kbps` : "Padrão"
-      const nameInfo =
-        templateType === "GAMES" && nameTemplate === "🎮 {user} - {game}"
-          ? "${nameTemplate} (usará o jogo atual)"
-          : nameTemplate
+      const container = createTemplateSetContainer(
+        templateType,
+        template.system.name,
+        nameTemplate,
+        userLimit ?? null,
+        bitrate ?? null
+      )
 
-      const embed = createEmbed({
-        title: "✅ Template configurado com sucesso!",
-        description: [
-          `**Sistema:** ${template.system.name}`,
-          `${icon} **Tipo:** ${templateType}`,
-          `📝 **Nome:** ${nameInfo}`,
-          `👥 **Limite:** ${userLimitText}`,
-          `🎵 **Bitrate:** ${bitrateText}`,
-        ],
-        color: constants.colors.success,
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
       })
-
-      await interaction.reply({ embeds: [embed], ephemeral: true })
     } catch (error) {
       console.error("[TempVoice Template] Erro ao salvar template:", error)
 
-      const embed = createEmbed({
-        description: "❌ Erro ao salvar o template. Tente novamente.",
-        color: constants.colors.danger,
-      })
+      const container = createContainer(
+        "#e74c3c",
+        createSection({
+          content: brBuilder(
+            "## ❌ Erro ao Salvar",
+            "Ocorreu um erro ao salvar o template.",
+            "",
+            "Por favor, tente novamente."
+          ),
+          thumbnail: "https://i.imgur.com/GjNu2Gv.png",
+        })
+      )
 
-      await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.reply({
+        flags: ["IsComponentsV2", "Ephemeral"],
+        components: [container],
+      })
     }
   },
 })

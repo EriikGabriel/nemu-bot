@@ -1,9 +1,9 @@
+import { createBirthdayListContainer } from "#components"
 import { prisma } from "#database"
 import { months } from "#types"
 import { ApplicationCommandOptionType } from "discord.js"
 import { command } from "./command.js"
 import {
-  createBirthdayEmbed,
   createMonthChoices,
   formatBirthdayDate,
   groupBirthdaysByMonth,
@@ -52,14 +52,14 @@ command.subcommand({
       }
     }
 
-    const embed = createBirthdayEmbed(
-      `Lista de Aniversários - ${interaction.guild?.name ?? "Servidor"}`,
+    const container = createBirthdayListContainer(
+      interaction.guild?.name ?? "Servidor",
       embedLines.join("\n")
     )
 
     await interaction.reply({
-      flags: ["Ephemeral"],
-      embeds: [embed],
+      flags: ["IsComponentsV2"],
+      components: [container],
       allowedMentions: { parse: [] },
     })
   },
