@@ -1,6 +1,6 @@
 import { createResponder } from "#base"
+import { parseOptionalNumber } from "#commands/tempvoice/template/helpers.js"
 import { prisma } from "#database"
-import { parseOptionalNumber } from "@commands/tempvoice/template/helpers.js"
 import { ResponderType } from "@constatic/base"
 import { createEmbed } from "@magicyan/discord"
 import { ModalSubmitInteraction } from "discord.js"

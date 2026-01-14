@@ -61,6 +61,18 @@
     ],
     "#shared/*": [
       "./build/shared/*"
+    ],
+    "#types": [
+      "./build/types/index.js"
+    ],
+    "#commands/*": [
+      "./build/discord/commands/*"
+    ],
+    "#responders/*": [
+      "./build/discord/responders/*"
+    ],
+    "#events/*": [
+      "./build/discord/events/*"
     ]
   },
   "baseVersion": "1.5.0"

@@ -1,5 +1,5 @@
 import { prisma } from "#database"
-import { months } from "@types"
+import { months } from "#types"
 import { ApplicationCommandOptionType } from "discord.js"
 import { command } from "./command.js"
 import {

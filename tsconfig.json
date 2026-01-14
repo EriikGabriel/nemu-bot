@@ -18,10 +18,10 @@
       "#shared/*": ["./src/shared/*"],
       "#types/*": ["./src/@types/*"],
       "#emojis": ["./emojis.json"],
-      "@types": ["./src/types/index.ts"],
-      "@commands/*": ["./src/discord/commands/*"],
-      "@responders/*": ["./src/discord/responders/*"],
-      "@events/*": ["./src/discord/events/*"]
+      "#types": ["./src/types/index.ts"],
+      "#commands/*": ["./src/discord/commands/*"],
+      "#responders/*": ["./src/discord/responders/*"],
+      "#events/*": ["./src/discord/events/*"]
     }
   },
 

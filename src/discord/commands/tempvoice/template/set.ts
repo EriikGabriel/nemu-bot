@@ -1,9 +1,9 @@
-import { prisma } from "#database"
 import {
   createBitrateInput,
   createNameTemplateInput,
   createUserLimitInput,
-} from "@commands/tempvoice/template/helpers.js"
+} from "#commands/tempvoice/template/helpers.js"
+import { prisma } from "#database"
 import { createEmbed, createModalFields } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"

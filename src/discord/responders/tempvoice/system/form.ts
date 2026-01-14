@@ -1,11 +1,11 @@
 import { createResponder } from "#base"
-import { prisma } from "#database"
 import {
   isValidNumber,
   parseDelay,
-} from "@commands/tempvoice/system/helpers.js"
+} from "#commands/tempvoice/system/helpers.js"
+import { prisma } from "#database"
+import { SelectInputModalData } from "#types"
 import { ResponderType } from "@constatic/base"
-import { SelectInputModalData } from "@types"
 import { ModalSubmitInteraction } from "discord.js"
 
 type FormData = {

@@ -3,7 +3,7 @@ import {
   createCategorySelect,
   createDeleteDelayInput,
   createNameInput,
-} from "@commands/tempvoice/system/helpers.js"
+} from "#commands/tempvoice/system/helpers.js"
 import { createModalFields } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
 import group from "./group.js"

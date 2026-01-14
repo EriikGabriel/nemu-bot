@@ -1,5 +1,5 @@
+import { months } from "#types"
 import { createEmbed } from "@magicyan/discord"
-import { months } from "@types"
 
 /**
  * Formata uma data de aniversário
