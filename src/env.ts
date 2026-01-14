@@ -8,5 +8,6 @@ export const env = await validateEnv(
     WEBHOOK_LOGS_URL: z.url().optional(),
     GUILD_ID: z.string().optional(),
     DATABASE_URL: z.url("Database URL is required").min(1),
+    DIRECT_URL: z.url("Direct Database URL is required").min(1),
   })
 )

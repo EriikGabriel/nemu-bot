@@ -9,10 +9,8 @@
     "dev:dev": "tsx --env-file=.env.dev ./src/index.ts",
     "watch": "tsx --watch --env-file=.env ./src/index.ts",
     "watch:dev": "tsx --watch --env-file=.env.dev ./src/index.ts",
-    "start": "node --env-file=.env .",
-    "start:dev": "node --env-file=.env.dev .",
-    "prestart": "prisma migrate deploy",
-    "postinstall": "prisma generate"
+    "start": "node --env-file=.env build/index.js",
+    "start:dev": "node --env-file=.env.dev build/index.js"
   },
   "dependencies": {
     "@constatic/base": "^0.0.2",
