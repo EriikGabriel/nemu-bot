@@ -45,12 +45,13 @@ model TempVoiceSystem {
 }
 
 model TempVoiceJoinChannel {
-  id        String          @id @default(uuid())
-  channelId String          @unique
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  systemId  String
-  system    TempVoiceSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)
+  id           String          @id @default(uuid())
+  channelId    String          @unique
+  templateType TempVoiceType
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  systemId     String
+  system       TempVoiceSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)
 
   @@index([systemId])
 }

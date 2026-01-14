@@ -1,7 +1,7 @@
 import { prisma } from "#database"
 import { months } from "@types"
 import { ApplicationCommandOptionType } from "discord.js"
-import group from "./group.js"
+import { command } from "./command.js"
 import {
   createBirthdayEmbed,
   createMonthChoices,
@@ -9,7 +9,7 @@ import {
   groupBirthdaysByMonth,
 } from "./helpers.js"
 
-group.subcommand({
+command.subcommand({
   name: "list",
   description: "Lista os aniversários registrados",
   options: [

@@ -1,14 +1,14 @@
 import { prisma } from "#database"
 import { brBuilder } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
-import group from "./group.js"
+import { command } from "./command.js"
 import {
   createBirthdayEmbed,
   createMonthChoices,
   formatBirthdayDate,
 } from "./helpers.js"
 
-group.subcommand({
+command.subcommand({
   name: "set",
   description: "Registra ou atualiza um aniversário",
   options: [

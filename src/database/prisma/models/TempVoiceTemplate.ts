@@ -481,10 +481,6 @@ export type TempVoiceTemplateUncheckedUpdateManyWithoutSystemNestedInput = {
   deleteMany?: Prisma.TempVoiceTemplateScalarWhereInput | Prisma.TempVoiceTemplateScalarWhereInput[]
 }
 
-export type EnumTempVoiceTypeFieldUpdateOperationsInput = {
-  set?: $Enums.TempVoiceType
-}
-
 export type TempVoiceTemplateCreateWithoutSystemInput = {
   id?: string
   type: $Enums.TempVoiceType

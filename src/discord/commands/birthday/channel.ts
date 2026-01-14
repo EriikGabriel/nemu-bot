@@ -1,10 +1,10 @@
 import { prisma } from "#database"
 import { brBuilder } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
-import group from "./group.js"
+import { command } from "./command.js"
 import { createBirthdayEmbed } from "./helpers.js"
 
-group.subcommand({
+command.subcommand({
   name: "channel",
   description: "Define o canal para anúncios de aniversário",
   options: [

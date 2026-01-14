@@ -27,6 +27,7 @@ export type AggregateTempVoiceJoinChannel = {
 export type TempVoiceJoinChannelMinAggregateOutputType = {
   id: string | null
   channelId: string | null
+  templateType: $Enums.TempVoiceType | null
   createdAt: Date | null
   updatedAt: Date | null
   systemId: string | null
@@ -35,6 +36,7 @@ export type TempVoiceJoinChannelMinAggregateOutputType = {
 export type TempVoiceJoinChannelMaxAggregateOutputType = {
   id: string | null
   channelId: string | null
+  templateType: $Enums.TempVoiceType | null
   createdAt: Date | null
   updatedAt: Date | null
   systemId: string | null
@@ -43,6 +45,7 @@ export type TempVoiceJoinChannelMaxAggregateOutputType = {
 export type TempVoiceJoinChannelCountAggregateOutputType = {
   id: number
   channelId: number
+  templateType: number
   createdAt: number
   updatedAt: number
   systemId: number
@@ -53,6 +56,7 @@ export type TempVoiceJoinChannelCountAggregateOutputType = {
 export type TempVoiceJoinChannelMinAggregateInputType = {
   id?: true
   channelId?: true
+  templateType?: true
   createdAt?: true
   updatedAt?: true
   systemId?: true
@@ -61,6 +65,7 @@ export type TempVoiceJoinChannelMinAggregateInputType = {
 export type TempVoiceJoinChannelMaxAggregateInputType = {
   id?: true
   channelId?: true
+  templateType?: true
   createdAt?: true
   updatedAt?: true
   systemId?: true
@@ -69,6 +74,7 @@ export type TempVoiceJoinChannelMaxAggregateInputType = {
 export type TempVoiceJoinChannelCountAggregateInputType = {
   id?: true
   channelId?: true
+  templateType?: true
   createdAt?: true
   updatedAt?: true
   systemId?: true
@@ -150,6 +156,7 @@ export type TempVoiceJoinChannelGroupByArgs<ExtArgs extends runtime.Types.Extens
 export type TempVoiceJoinChannelGroupByOutputType = {
   id: string
   channelId: string
+  templateType: $Enums.TempVoiceType
   createdAt: Date
   updatedAt: Date
   systemId: string
@@ -179,6 +186,7 @@ export type TempVoiceJoinChannelWhereInput = {
   NOT?: Prisma.TempVoiceJoinChannelWhereInput | Prisma.TempVoiceJoinChannelWhereInput[]
   id?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
   channelId?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
+  templateType?: Prisma.EnumTempVoiceTypeFilter<"TempVoiceJoinChannel"> | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFilter<"TempVoiceJoinChannel"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TempVoiceJoinChannel"> | Date | string
   systemId?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
@@ -188,6 +196,7 @@ export type TempVoiceJoinChannelWhereInput = {
 export type TempVoiceJoinChannelOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
+  templateType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   systemId?: Prisma.SortOrder
@@ -200,6 +209,7 @@ export type TempVoiceJoinChannelWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TempVoiceJoinChannelWhereInput | Prisma.TempVoiceJoinChannelWhereInput[]
   OR?: Prisma.TempVoiceJoinChannelWhereInput[]
   NOT?: Prisma.TempVoiceJoinChannelWhereInput | Prisma.TempVoiceJoinChannelWhereInput[]
+  templateType?: Prisma.EnumTempVoiceTypeFilter<"TempVoiceJoinChannel"> | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFilter<"TempVoiceJoinChannel"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TempVoiceJoinChannel"> | Date | string
   systemId?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
@@ -209,6 +219,7 @@ export type TempVoiceJoinChannelWhereUniqueInput = Prisma.AtLeast<{
 export type TempVoiceJoinChannelOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
+  templateType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   systemId?: Prisma.SortOrder
@@ -223,6 +234,7 @@ export type TempVoiceJoinChannelScalarWhereWithAggregatesInput = {
   NOT?: Prisma.TempVoiceJoinChannelScalarWhereWithAggregatesInput | Prisma.TempVoiceJoinChannelScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"TempVoiceJoinChannel"> | string
   channelId?: Prisma.StringWithAggregatesFilter<"TempVoiceJoinChannel"> | string
+  templateType?: Prisma.EnumTempVoiceTypeWithAggregatesFilter<"TempVoiceJoinChannel"> | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TempVoiceJoinChannel"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"TempVoiceJoinChannel"> | Date | string
   systemId?: Prisma.StringWithAggregatesFilter<"TempVoiceJoinChannel"> | string
@@ -231,6 +243,7 @@ export type TempVoiceJoinChannelScalarWhereWithAggregatesInput = {
 export type TempVoiceJoinChannelCreateInput = {
   id?: string
   channelId: string
+  templateType: $Enums.TempVoiceType
   createdAt?: Date | string
   updatedAt?: Date | string
   system: Prisma.TempVoiceSystemCreateNestedOneWithoutJoinsInput
@@ -239,6 +252,7 @@ export type TempVoiceJoinChannelCreateInput = {
 export type TempVoiceJoinChannelUncheckedCreateInput = {
   id?: string
   channelId: string
+  templateType: $Enums.TempVoiceType
   createdAt?: Date | string
   updatedAt?: Date | string
   systemId: string
@@ -247,6 +261,7 @@ export type TempVoiceJoinChannelUncheckedCreateInput = {
 export type TempVoiceJoinChannelUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateType?: Prisma.EnumTempVoiceTypeFieldUpdateOperationsInput | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   system?: Prisma.TempVoiceSystemUpdateOneRequiredWithoutJoinsNestedInput
@@ -255,6 +270,7 @@ export type TempVoiceJoinChannelUpdateInput = {
 export type TempVoiceJoinChannelUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateType?: Prisma.EnumTempVoiceTypeFieldUpdateOperationsInput | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   systemId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -263,6 +279,7 @@ export type TempVoiceJoinChannelUncheckedUpdateInput = {
 export type TempVoiceJoinChannelCreateManyInput = {
   id?: string
   channelId: string
+  templateType: $Enums.TempVoiceType
   createdAt?: Date | string
   updatedAt?: Date | string
   systemId: string
@@ -271,6 +288,7 @@ export type TempVoiceJoinChannelCreateManyInput = {
 export type TempVoiceJoinChannelUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateType?: Prisma.EnumTempVoiceTypeFieldUpdateOperationsInput | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -278,6 +296,7 @@ export type TempVoiceJoinChannelUpdateManyMutationInput = {
 export type TempVoiceJoinChannelUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateType?: Prisma.EnumTempVoiceTypeFieldUpdateOperationsInput | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   systemId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -296,6 +315,7 @@ export type TempVoiceJoinChannelOrderByRelationAggregateInput = {
 export type TempVoiceJoinChannelCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
+  templateType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   systemId?: Prisma.SortOrder
@@ -304,6 +324,7 @@ export type TempVoiceJoinChannelCountOrderByAggregateInput = {
 export type TempVoiceJoinChannelMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
+  templateType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   systemId?: Prisma.SortOrder
@@ -312,6 +333,7 @@ export type TempVoiceJoinChannelMaxOrderByAggregateInput = {
 export type TempVoiceJoinChannelMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   channelId?: Prisma.SortOrder
+  templateType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   systemId?: Prisma.SortOrder
@@ -359,9 +381,14 @@ export type TempVoiceJoinChannelUncheckedUpdateManyWithoutSystemNestedInput = {
   deleteMany?: Prisma.TempVoiceJoinChannelScalarWhereInput | Prisma.TempVoiceJoinChannelScalarWhereInput[]
 }
 
+export type EnumTempVoiceTypeFieldUpdateOperationsInput = {
+  set?: $Enums.TempVoiceType
+}
+
 export type TempVoiceJoinChannelCreateWithoutSystemInput = {
   id?: string
   channelId: string
+  templateType: $Enums.TempVoiceType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -369,6 +396,7 @@ export type TempVoiceJoinChannelCreateWithoutSystemInput = {
 export type TempVoiceJoinChannelUncheckedCreateWithoutSystemInput = {
   id?: string
   channelId: string
+  templateType: $Enums.TempVoiceType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -405,6 +433,7 @@ export type TempVoiceJoinChannelScalarWhereInput = {
   NOT?: Prisma.TempVoiceJoinChannelScalarWhereInput | Prisma.TempVoiceJoinChannelScalarWhereInput[]
   id?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
   channelId?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
+  templateType?: Prisma.EnumTempVoiceTypeFilter<"TempVoiceJoinChannel"> | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFilter<"TempVoiceJoinChannel"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TempVoiceJoinChannel"> | Date | string
   systemId?: Prisma.StringFilter<"TempVoiceJoinChannel"> | string
@@ -413,6 +442,7 @@ export type TempVoiceJoinChannelScalarWhereInput = {
 export type TempVoiceJoinChannelCreateManySystemInput = {
   id?: string
   channelId: string
+  templateType: $Enums.TempVoiceType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -420,6 +450,7 @@ export type TempVoiceJoinChannelCreateManySystemInput = {
 export type TempVoiceJoinChannelUpdateWithoutSystemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateType?: Prisma.EnumTempVoiceTypeFieldUpdateOperationsInput | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -427,6 +458,7 @@ export type TempVoiceJoinChannelUpdateWithoutSystemInput = {
 export type TempVoiceJoinChannelUncheckedUpdateWithoutSystemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateType?: Prisma.EnumTempVoiceTypeFieldUpdateOperationsInput | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -434,6 +466,7 @@ export type TempVoiceJoinChannelUncheckedUpdateWithoutSystemInput = {
 export type TempVoiceJoinChannelUncheckedUpdateManyWithoutSystemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   channelId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateType?: Prisma.EnumTempVoiceTypeFieldUpdateOperationsInput | $Enums.TempVoiceType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -443,6 +476,7 @@ export type TempVoiceJoinChannelUncheckedUpdateManyWithoutSystemInput = {
 export type TempVoiceJoinChannelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   channelId?: boolean
+  templateType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   systemId?: boolean
@@ -452,6 +486,7 @@ export type TempVoiceJoinChannelSelect<ExtArgs extends runtime.Types.Extensions.
 export type TempVoiceJoinChannelSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   channelId?: boolean
+  templateType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   systemId?: boolean
@@ -461,6 +496,7 @@ export type TempVoiceJoinChannelSelectCreateManyAndReturn<ExtArgs extends runtim
 export type TempVoiceJoinChannelSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   channelId?: boolean
+  templateType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   systemId?: boolean
@@ -470,12 +506,13 @@ export type TempVoiceJoinChannelSelectUpdateManyAndReturn<ExtArgs extends runtim
 export type TempVoiceJoinChannelSelectScalar = {
   id?: boolean
   channelId?: boolean
+  templateType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   systemId?: boolean
 }
 
-export type TempVoiceJoinChannelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "channelId" | "createdAt" | "updatedAt" | "systemId", ExtArgs["result"]["tempVoiceJoinChannel"]>
+export type TempVoiceJoinChannelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "channelId" | "templateType" | "createdAt" | "updatedAt" | "systemId", ExtArgs["result"]["tempVoiceJoinChannel"]>
 export type TempVoiceJoinChannelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   system?: boolean | Prisma.TempVoiceSystemDefaultArgs<ExtArgs>
 }
@@ -494,6 +531,7 @@ export type $TempVoiceJoinChannelPayload<ExtArgs extends runtime.Types.Extension
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     channelId: string
+    templateType: $Enums.TempVoiceType
     createdAt: Date
     updatedAt: Date
     systemId: string
@@ -923,6 +961,7 @@ export interface Prisma__TempVoiceJoinChannelClient<T, Null = never, ExtArgs ext
 export interface TempVoiceJoinChannelFieldRefs {
   readonly id: Prisma.FieldRef<"TempVoiceJoinChannel", 'String'>
   readonly channelId: Prisma.FieldRef<"TempVoiceJoinChannel", 'String'>
+  readonly templateType: Prisma.FieldRef<"TempVoiceJoinChannel", 'TempVoiceType'>
   readonly createdAt: Prisma.FieldRef<"TempVoiceJoinChannel", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"TempVoiceJoinChannel", 'DateTime'>
   readonly systemId: Prisma.FieldRef<"TempVoiceJoinChannel", 'String'>

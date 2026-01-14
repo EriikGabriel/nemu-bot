@@ -1,10 +1,10 @@
 import { prisma } from "#database"
 import { brBuilder } from "@magicyan/discord"
 import { ApplicationCommandOptionType } from "discord.js"
-import group from "./group.js"
 import { createBirthdayEmbed } from "./helpers.js"
+import { command } from "./command.js"
 
-group.subcommand({
+command.subcommand({
   name: "remove",
   description: "Remove o aniversário registrado",
   options: [

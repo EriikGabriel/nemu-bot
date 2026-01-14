@@ -932,6 +932,7 @@ export type TempVoiceSystemScalarFieldEnum = (typeof TempVoiceSystemScalarFieldE
 export const TempVoiceJoinChannelScalarFieldEnum = {
   id: 'id',
   channelId: 'channelId',
+  templateType: 'templateType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   systemId: 'systemId'

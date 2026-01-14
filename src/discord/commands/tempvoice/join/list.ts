@@ -81,7 +81,10 @@ group.subcommand({
       description: brBuilder(
         ...systemsWithChannels.map((system, index) => {
           const channels = system.joins
-            .map((jc) => `  └ <#${jc.channelId}>`)
+            .map((jc) => {
+              const icon = jc.templateType === "GAMES" ? "🎮" : "🏠"
+              return `  └ ${icon} <#${jc.channelId}> - ${jc.templateType}`
+            })
             .join("\n")
 
           const separator =
