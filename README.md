@@ -21,10 +21,11 @@ This is the most complete discord bot base you've ever seen! Developed by [@rinc
 - [Responder](https://constatic-docs.vercel.app/docs/discord/responders)
 - [Events](https://constatic-docs.vercel.app/docs/discord/events)
 
-# Tasks and Features
+## Tasks and Features
 
 - [ ] Create a private voice channel per user permissions. Based on a current playing game. Temporary and secure;
 - [ ] Register events and automatic change icons in festive dates;
 - [ ] Register and wish birthdays members;
 - [ ] Programmer features;
 - [ ] Music bot features;
+
